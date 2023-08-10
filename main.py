@@ -21,3 +21,8 @@ def calculate_SMA(ticker, window):
 def calculate_EMA(ticker, window):
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.ewm(span=window).mean().iloc[-1])
+
+def calculate_RSI(ticker):
+    data = yf.Ticker(ticker).history(period="1y").Close
+    delta = data.diff()
+    up = delta.clip(lower=0)
