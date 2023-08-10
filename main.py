@@ -22,12 +22,29 @@ def calculate_EMA(ticker, window):
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.ewm(span=window).mean().iloc[-1])
 
+import yfinance as yf
+
 def calculate_RSI(ticker):
+    # Fetch historical closing prices for the given ticker over the last 1 year
     data = yf.Ticker(ticker).history(period="1y").Close
+    
+    # Calculate the price change (delta) between consecutive days
     delta = data.diff()
+    
+    # Separate positive price changes (gains) and negative price changes (losses)
     up = delta.clip(lower=0)
     down = -1 * delta.clip(upper=0)
-    ema_up = up.ewm(com=14-1, adjustt=False).mean()
+    
+    # Calculate the 14-day Exponential Moving Average (EMA) of gains and losses
+    ema_up = up.ewm(com=14 - 1, adjust=False).mean()
     ema_down = down.ewm(com=14 - 1, adjust=False).mean()
-    rs =ema_up / ema_down
-    return str(100 - (100 / (1+rs)).iloc[-1])
+    
+    # Calculate the Relative Strength (RS) by dividing EMA of gains by EMA of losses
+    rs = ema_up / ema_down
+    
+    # Calculate the RSI using the formula: 100 - (100 / (1 + RS))
+    rsi = 100 - (100 / (1 + rs)).iloc[-1]
+    
+    # Convert the RSI value to a string and return
+    return str(rsi)
+
