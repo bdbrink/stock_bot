@@ -48,3 +48,9 @@ def calculate_RSI(ticker):
     # Convert the RSI value to a string and return
     return str(rsi)
 
+def calculate_MACD(ticker):
+    data = yf.Ticker(ticker).history(period="1y").Close
+    short_EMA = data.ewm(span=12, adjust=False).mean()
+    long_EMA = data.ewm(span=26, adjust=False).mean()
+
+    MACD = short_EMA - long_EMA
