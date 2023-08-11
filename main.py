@@ -54,3 +54,7 @@ def calculate_MACD(ticker):
     long_EMA = data.ewm(span=26, adjust=False).mean()
 
     MACD = short_EMA - long_EMA
+    signal = MACD.ewm(span=9, adjust=Fasle).mean()
+    MACD_histogram = MACD - signal
+
+    return f"{MACD[-1]}, {signal[-1]}, {MACD_histogram[-1]}"
