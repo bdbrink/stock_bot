@@ -49,12 +49,23 @@ def calculate_RSI(ticker):
     return str(rsi)
 
 def calculate_MACD(ticker):
+    # Fetch historical stock price data for the given ticker over the last year
     data = yf.Ticker(ticker).history(period="1y").Close
+    
+    # Calculate the 12-day Exponential Moving Average (EMA) of closing prices (short-term EMA)
     short_EMA = data.ewm(span=12, adjust=False).mean()
+    
+    # Calculate the 26-day Exponential Moving Average of closing prices (long-term EMA)
     long_EMA = data.ewm(span=26, adjust=False).mean()
 
+    # Calculate the MACD line by subtracting the long-term EMA from the short-term EMA
     MACD = short_EMA - long_EMA
-    signal = MACD.ewm(span=9, adjust=Fasle).mean()
+    
+    # Calculate the signal line (9-day EMA of the MACD line)
+    signal = MACD.ewm(span=9, adjust=False).mean()
+    
+    # Calculate the MACD histogram by subtracting the signal line from the MACD line
     MACD_histogram = MACD - signal
-
-    return f"{MACD[-1]}, {signal[-1]}, {MACD_histogram[-1]}"
+    
+    # Return a formatted string containing the last values of MACD line, signal line, and MACD histogram
+    return f"MACD: {MACD[-1]}, Signal Line: {signal[-1]}, MACD Histogram: {MACD_histogram[-1]}"
