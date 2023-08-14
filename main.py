@@ -9,20 +9,49 @@ import os
 # use export command to generate
 openai.api_key = os.environ['OPEN_API_KEY']
 
-def stock_price_price(ticker):
+# Function to get the latest stock price for a given ticker
+def get_latest_stock_price(ticker):
+    """
+    Retrieves the latest stock price for a given ticker.
+
+    Args:
+    ticker (str): The stock ticker symbol.
+
+    Returns:
+    str: The latest stock price as a string.
+    """
     return str(yf.Ticker(ticker).history(period="1y").iloc[-1].Close)
 
-# simple moving average
+# Function to calculate the Simple Moving Average (SMA) for a given ticker and window size
 def calculate_SMA(ticker, window):
+    """
+    Calculates the Simple Moving Average (SMA) for a given stock ticker and window size.
+
+    Args:
+    ticker (str): The stock ticker symbol.
+    window (int): The window size for the SMA calculation.
+
+    Returns:
+    str: The calculated SMA as a string.
+    """
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.rolling(window=window).mean().iloc[-1])
 
-# exponential moving average
+# Function to calculate the Exponential Moving Average (EMA) for a given ticker and window size
 def calculate_EMA(ticker, window):
+    """
+    Calculates the Exponential Moving Average (EMA) for a given stock ticker and window size.
+
+    Args:
+    ticker (str): The stock ticker symbol.
+    window (int): The window size for the EMA calculation.
+
+    Returns:
+    str: The calculated EMA as a string.
+    """
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.ewm(span=window).mean().iloc[-1])
 
-import yfinance as yf
 
 def calculate_RSI(ticker):
     # Fetch historical closing prices for the given ticker over the last 1 year
