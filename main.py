@@ -98,3 +98,9 @@ def calculate_MACD(ticker):
     
     # Return a formatted string containing the last values of MACD line, signal line, and MACD histogram
     return f"MACD: {MACD[-1]}, Signal Line: {signal[-1]}, MACD Histogram: {MACD_histogram[-1]}"
+
+def plot_stock_price(ticker):
+    data = yf.Ticker(ticker).history(period="1y")
+    plt.figure(figsize=(10,5))
+    plt.plot(*args:data.index, data.Close)
+    plt.title(f"{ticker} Stock Price over last year")
