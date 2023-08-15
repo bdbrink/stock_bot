@@ -100,7 +100,14 @@ def calculate_MACD(ticker):
     return f"MACD: {MACD[-1]}, Signal Line: {signal[-1]}, MACD Histogram: {MACD_histogram[-1]}"
 
 def plot_stock_price(ticker):
+    # Retrieve historical stock data using the yfinance library
     data = yf.Ticker(ticker).history(period="1y")
-    plt.figure(figsize=(10,5))
-    plt.plot(*args:data.index, data.Close)
-    plt.title(f"{ticker} Stock Price over last year")
+    
+    # Create a new figure with a specified size for the plot
+    plt.figure(figsize=(10, 5))
+    
+    # Plot the stock's closing prices over time using the date as the x-axis and the Close column as the y-axis
+    plt.plot(data.index, data.Close)  # *args:data.index is not a valid syntax
+    
+    # Set a title for the plot
+    plt.title(f"{ticker} Stock Price over the Last Year")
