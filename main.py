@@ -119,3 +119,13 @@ def plot_stock_price(ticker):
 
     # Set a title for the plot
     plt.title(f"{ticker} Stock Price over the Last Year")
+
+    plt.xlabel("Date")
+
+    plt.ylabel("Stock Price ($) ")
+
+    plt.grid(True)
+
+    plt.savefig("stock.png")
+
+    plt.close()
