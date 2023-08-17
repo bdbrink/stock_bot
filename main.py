@@ -129,3 +129,20 @@ def plot_stock_price(ticker):
     plt.savefig("stock.png")
 
     plt.close()
+
+functions = [
+    {
+        "name": "get_stock_price",
+        "description": "get the latest stock price given the ticker symbol.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string"
+                    "description": "stock ticker symbol for a company (for example MSFT is microsoft)."
+                }
+            },
+            "required": ["ticker"]
+        },
+    },
+] 
