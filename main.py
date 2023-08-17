@@ -143,6 +143,24 @@ functions = [
                 }
             },
             "required": ["ticker"]
+        }
+    },
+    {
+        "name": "calculate_SMA",
+        "description": "calculate the simple moving average for a given stock ticker and window",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string"
+                    "description": "stock ticker symbol for a company (for example MSFT is microsoft)."
+                },
+                "window": {
+                    "type": "interger"
+                    "description": "the timeframe to consider when calculating the SMA"
+                }
+            },
+            "required": ["ticker", "window"]
         },
     },
 ] 
