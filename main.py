@@ -130,6 +130,7 @@ def plot_stock_price(ticker):
 
     plt.close()
 
+
 functions = [
     {
         "name": "get_stock_price",
@@ -163,4 +164,4 @@ functions = [
             "required": ["ticker", "window"]
         },
     },
-] 
+]
