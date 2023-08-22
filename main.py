@@ -164,4 +164,22 @@ functions = [
             "required": ["ticker", "window"]
         },
     },
+    {
+        "name": "calculate_EMA",
+        "description": "calculate the exponential moving average for a given stock ticker and window",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string"
+                    "description": "stock ticker symbol for a company (for example MSFT is microsoft)."
+                },
+                "window": {
+                    "type": "interger"
+                    "description": "the timeframe to consider when calculating the EMA"
+                }
+            },
+            "required": ["ticker", "window"]
+        },
+    },
 ]
