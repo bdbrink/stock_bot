@@ -197,7 +197,7 @@ functions = [
                     "description": "the timeframe to consider when calculating the EMA"
                 }
             },
-            "required": ["ticker", "window"]
+            "required": ["ticker"]
         },
     },
 ]
