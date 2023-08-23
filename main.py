@@ -7,7 +7,7 @@ import yfinance as yf
 import os
 
 # use export command to generate
-openai.api_key = os.environ['OPEN_API_KEY']
+openai.api_key = os.environ["OPEN_API_KEY"]
 
 # Function to get the latest stock price for a given ticker
 
@@ -23,6 +23,7 @@ def get_latest_stock_price(ticker):
     str: The latest stock price as a string.
     """
     return str(yf.Ticker(ticker).history(period="1y").iloc[-1].Close)
+
 
 # Function to calculate the Simple Moving Average (SMA) for a given ticker and window size
 
@@ -40,6 +41,7 @@ def calculate_SMA(ticker, window):
     """
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.rolling(window=window).mean().iloc[-1])
+
 
 # Function to calculate the Exponential Moving Average (EMA) for a given ticker and window size
 
