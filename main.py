@@ -202,4 +202,18 @@ functions = [
             "required": ["ticker"]
         },
     },
+    {
+        "name": "plot_stock_price",
+        "description": "Plot the stock price for last year give the sticker of the company",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "ticker": {
+                    "type": "string"
+                    "description": "stock ticker symbol for a company (for example MSFT is microsoft)."
+                },
+            },
+            "required": ["ticker"]
+        },
+    },
 ]
