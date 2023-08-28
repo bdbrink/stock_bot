@@ -225,3 +225,6 @@ available_funcs = {
     "calculate_RSI": calculate_RSI,
     "calculate_MACD": calculate_MACD
 }
+
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
