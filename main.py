@@ -217,3 +217,11 @@ functions = [
         },
     },
 ]
+
+available_funcs = {
+    "get_stock_latest_price": get_latest_stock_price,
+    "calculate_SMA": calculate_SMA,
+    "calculate_EMA": calculate_EMA,
+    "calculate_RSI": calculate_RSI,
+    "calculate_MACD": calculate_MACD
+}
