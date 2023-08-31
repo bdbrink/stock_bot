@@ -228,3 +228,13 @@ available_funcs = {
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = []
+
+st.title("Stock Analysis Chatbot")
+
+user_input= st.text_input("Your Input:")
+
+if user_input:
+    try:
+        
+    except:
+        pass
