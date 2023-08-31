@@ -235,6 +235,6 @@ user_input= st.text_input("Your Input:")
 
 if user_input:
     try:
-        
+        st.session_state["messages"].append({"role": "user", "content": f"{user_input}"})
     except:
         pass
