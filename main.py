@@ -231,10 +231,11 @@ if "messages" not in st.session_state:
 
 st.title("Stock Analysis Chatbot")
 
-user_input= st.text_input("Your Input:")
+user_input = st.text_input("Your Input:")
 
 if user_input:
     try:
-        st.session_state["messages"].append({"role": "user", "content": f"{user_input}"})
+        st.session_state["messages"].append(
+            {"role": "user", "content": f"{user_input}"})
     except:
         pass
