@@ -255,5 +255,7 @@ if user_input:
                 args_dict = {"ticker": function_args.get("ticker"), "window": function_args.get("window")}
 
             function_to_call = available_funcs[function_name]
+            function_response = function_to_call(**args_dict)
+            
     except:
         pass
