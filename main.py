@@ -256,6 +256,10 @@ if user_input:
 
             function_to_call = available_funcs[function_name]
             function_response = function_to_call(**args_dict)
-            
+
+            if function_name == "plot_stock_price":
+                st.image("stock.png")
+            else:
+                st.session_state["messages"].append(response_message)
     except:
         pass
