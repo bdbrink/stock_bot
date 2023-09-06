@@ -251,5 +251,9 @@ if user_input:
             function_args = json.loads(response_message["function_call"]["arguements"])
             if function_name in ["get_stock_price", "calculate_RSI", "calculate_MACD", "plot_stock_price"]:
                 args_dict = {"ticker": function_args.get("ticker")}
+            elif function_name in ["calculate_SMA", "calculate_EMA"]:
+                args_dict = {"ticker": function_args.get("ticker"), "window": function_args.get("window")}
+
+            function_to_call = available_funcs[function_name]
     except:
         pass
