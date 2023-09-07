@@ -237,7 +237,7 @@ if user_input:
     try:
         st.session_state["messages"].append(
             {"role": "user", "content": f"{user_input}"})
-        
+
         response = openai.ChatCompletion.create(
             model="gpt-3.5=turbo-0613",
             messages=st.session_state["messages"],
@@ -248,11 +248,13 @@ if user_input:
 
         if response_message.get("function_call"):
             function_name = response_message["function_call"]["name"]
-            function_args = json.loads(response_message["function_call"]["arguements"])
+            function_args = json.loads(
+                response_message["function_call"]["arguements"])
             if function_name in ["get_stock_price", "calculate_RSI", "calculate_MACD", "plot_stock_price"]:
                 args_dict = {"ticker": function_args.get("ticker")}
             elif function_name in ["calculate_SMA", "calculate_EMA"]:
-                args_dict = {"ticker": function_args.get("ticker"), "window": function_args.get("window")}
+                args_dict = {"ticker": function_args.get(
+                    "ticker"), "window": function_args.get("window")}
 
             function_to_call = available_funcs[function_name]
             function_response = function_to_call(**args_dict)
