@@ -263,5 +263,12 @@ if user_input:
                 st.image("stock.png")
             else:
                 st.session_state["messages"].append(response_message)
+                st.session_state["messages"].append(
+                    {
+                        "role": "function",
+                        "name": function_name,
+                        "content": function_response
+                    }
+                )
     except:
         pass
