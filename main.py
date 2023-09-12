@@ -274,5 +274,8 @@ if user_input:
                     model="gpt-3.5-turbo-0613",
                     messages=st.session_state["messages"]
                 )
+        else:
+            st.text(response_message["content"])
+            st.session_state["messages"].append({"role": "assistant", "content": response_message["content"]})
     except:
         pass
