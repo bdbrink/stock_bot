@@ -279,4 +279,4 @@ if user_input:
             st.session_state["messages"].append(
                 {"role": "assistant", "content": response_message["content"]})
     except:
-        pass
+        st.text("try again")
