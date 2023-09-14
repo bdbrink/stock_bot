@@ -10,18 +10,25 @@ import os
 openai.api_key = os.environ["OPEN_API_KEY"]
 
 # Function to get the latest stock price for a given ticker
+
+
 def get_latest_stock_price(ticker):
     return str(yf.Ticker(ticker).history(period="1y").iloc[-1].Close)
 
 # Function to calculate the Simple Moving Average (SMA) for a given ticker and window size
+
+
 def calculate_SMA(ticker, window):
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.rolling(window=window).mean().iloc[-1])
 
 # Function to calculate the Exponential Moving Average (EMA) for a given ticker and window size
+
+
 def calculate_EMA(ticker, window):
     data = yf.Ticker(ticker).history(period="1y").Close
     return str(data.ewm(span=window).mean().iloc[-1])
+
 
 def calculate_RSI(ticker):
     data = yf.Ticker(ticker).history(period="1y").Close
@@ -34,6 +41,7 @@ def calculate_RSI(ticker):
     rsi = 100 - (100 / (1 + rs)).iloc[-1]
     return str(rsi)
 
+
 def calculate_MACD(ticker):
     data = yf.Ticker(ticker).history(period="1y").Close
     short_EMA = data.ewm(span=12, adjust=False).mean()
@@ -42,6 +50,7 @@ def calculate_MACD(ticker):
     signal = MACD.ewm(span=9, adjust=False).mean()
     MACD_histogram = MACD - signal
     return f"MACD: {MACD[-1]}, Signal Line: {signal[-1]}, MACD Histogram: {MACD_histogram[-1]}"
+
 
 def plot_stock_price(ticker):
     data = yf.Ticker(ticker).history(period="1y")
@@ -53,6 +62,7 @@ def plot_stock_price(ticker):
     plt.grid(True)
     plt.savefig("stock.png")
     plt.close()
+
 
 # Define function descriptions and parameters for OpenAI chatbot
 functions = [
@@ -153,7 +163,8 @@ user_input = st.text_input("Your Input:")
 
 if user_input:
     try:
-        st.session_state["messages"].append({"role": "user", "content": f"{user_input}"})
+        st.session_state["messages"].append(
+            {"role": "user", "content": f"{user_input}"})
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-0613",
             messages=st.session_state["messages"],
@@ -163,11 +174,13 @@ if user_input:
         response_message = response["choices"][0]["message"]
         if response_message.get("function_call"):
             function_name = response_message["function_call"]["name"]
-            function_args = json.loads(response_message["function_call"]["arguments"])
+            function_args = json.loads(
+                response_message["function_call"]["arguments"])
             if function_name in ["get_latest_stock_price", "calculate_RSI", "calculate_MACD", "plot_stock_price"]:
                 args_dict = {"ticker": function_args.get("ticker")}
             elif function_name in ["calculate_SMA", "calculate_EMA"]:
-                args_dict = {"ticker": function_args.get("ticker"), "window": function_args.get("window")}
+                args_dict = {"ticker": function_args.get(
+                    "ticker"), "window": function_args.get("window")}
             function_to_call = available_funcs[function_name]
             function_response = function_to_call(**args_dict)
             if function_name == "plot_stock_price":
@@ -185,6 +198,7 @@ if user_input:
                 )
         else:
             st.text(response_message["content"])
-            st.session_state["messages"].append({"role": "assistant", "content": response_message["content"]})
+            st.session_state["messages"].append(
+                {"role": "assistant", "content": response_message["content"]})
     except:
         st.text("Try again")
