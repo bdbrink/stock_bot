@@ -37,13 +37,6 @@ To configure Stock Bot according to your requirements, you can edit the `config.
 
 For instructions on how to install and run the Stock Bot script, please refer to the provided documentation or README. The README contains step-by-step installation and usage instructions to help you get started with this tool.
 
-## License
-
-This project is licensed under the MIT License. You can find the full license text in the `LICENSE` file.
-
-## Contribution
-
-Contributions to this project are welcome! If you want to contribute, please follow the guidelines in the `CONTRIBUTING.md` file.
 
 ## Issues and Feedback
 
